@@ -39,6 +39,7 @@ const TodoForm: React.FC<Props> = ({ newTask }) => {
         className="w-full px-4 py-2 mb-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-lg"
         placeholder="Tiêu đề công việc"
         onChange={(e) => setTitle(e.target.value)}
+        value={title}
       />
 
       <textarea
@@ -46,6 +47,7 @@ const TodoForm: React.FC<Props> = ({ newTask }) => {
         placeholder="Mô tả công việc"
         rows={3}
         onChange={(e) => setDescription(e.target.value)}
+        value={description}
       />
 
       <button
