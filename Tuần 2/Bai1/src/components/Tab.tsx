@@ -3,7 +3,7 @@ import { useState } from "react";
 const Tab = () => {
   const [activeTab, setActiveTab] = useState("Component");
 
-  const data = {
+  const data: { [key: string]: string } = {
     component:
       "Component là thành phần cơ bản của React, giúp chia UI thành các phần nhỏ có thể tái sử dụng. Mỗi component có thể là một function component hoặc class component, nhận props làm đầu vào và trả về JSX để hiển thị giao diện.",
     state:
