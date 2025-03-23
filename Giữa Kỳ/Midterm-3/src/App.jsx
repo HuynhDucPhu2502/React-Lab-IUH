@@ -7,21 +7,15 @@ const intialValue = {
   total: 0,
 };
 
-const cartReducer = (state, action) => {
+const CartReducer = (state, action) => {
   switch (action.type) {
     case "ADD": {
-      const index = state.cart.findIndex(
-        (item) => item.id == action.payload.id
-      );
+      const index = state.cart.findIndex((x) => x.id === action.payload.id);
 
       if (index !== -1) {
-        const existingItem = state.cart[index];
+        const item = state.cart[index];
         const updatedCart = [...state.cart];
-
-        updatedCart[index] = {
-          ...existingItem,
-          quantity: existingItem.quantity + 1,
-        };
+        updatedCart[index] = { ...item, quantity: item.quantity + 1 };
 
         return {
           ...state,
@@ -37,43 +31,40 @@ const cartReducer = (state, action) => {
       }
     }
     case "REMOVE": {
-      const index = state.cart.findIndex(
-        (item) => item.id === action.payload.id
-      );
+      const index = state.cart.findIndex((x) => x.id === action.payload.id);
 
       if (index === -1) return { ...state };
 
-      const existingItem = state.cart[index];
-      if (existingItem.quantity > 1) {
+      const item = state.cart[index];
+
+      if (item.quantity > 1) {
         const updatedCart = [...state.cart];
-        updatedCart[index] = {
-          ...existingItem,
-          quantity: existingItem.quantity - 1,
-        };
+        updatedCart[index] = { ...item, quantity: item.quantity - 1 };
 
         return {
           ...state,
           cart: updatedCart,
-          total: state.total - existingItem.gia,
+          total: state.total - item.gia,
         };
       } else {
         const updatedCart = state.cart.filter(
-          (item) => item.id !== action.payload.id
+          (x) => x.id !== action.payload.id
         );
         return {
           ...state,
           cart: updatedCart,
-          total: state.total - existingItem.gia,
+          total: state.total - item.gia,
         };
       }
     }
+
     default:
       return { ...state };
   }
 };
 
 function App() {
-  const [state, dispatch] = useReducer(cartReducer, intialValue);
+  const [state, dispatch] = useReducer(CartReducer, intialValue);
   console.log(state.cart);
   return (
     <>
