@@ -7,17 +7,13 @@ const Footer = () => {
         <div className="flex flex-row justify-between items-center bg-gray-800 rounded-lg px-4 py-2">
           <img src={logo} alt="" className="w-24" />
           <div className="flex flex-col">
-            <h1 className="text-xl md:text-3xl text-blue-400 font-bold">IUH</h1>
+            <h1 className="text-xl md:text-3xl text-blue-400 font-bold">
+              ADMIN PAGE
+            </h1>
             <p className="md:text-lg">
-              Welcome to our website, lean how to cook like Pro
+              Powered by Admin. Keep your website running smoothly.
             </p>
           </div>
-        </div>
-
-        <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
-          <a className="text-lg hover:text-blue-600">Recipes</a>
-          <a className="text-lg hover:text-blue-600">Ingredients</a>
-          <a className="text-lg hover:text-blue-600">Ocassions</a>
         </div>
 
         <div className="flex flex-col text-gray-300 text-center">

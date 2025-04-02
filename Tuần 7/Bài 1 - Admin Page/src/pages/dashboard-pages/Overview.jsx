@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { fetchStatic } from "../../services/staticService";
 import { SquareChartGantt } from "lucide-react";
 import { OverviewCard } from "./OverviewCard";
+import { fetchStatic } from "../../services/staticService";
 
 export const Overview = () => {
   const [data, setData] = useState([]);

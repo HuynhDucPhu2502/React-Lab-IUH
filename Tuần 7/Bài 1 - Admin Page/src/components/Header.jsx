@@ -1,35 +1,23 @@
-import { Bell, CircleHelp, Search } from "lucide-react";
-import man from "../assets/man.png";
+import React, { useEffect, useState } from "react";
 
-const Header = () => {
+export const Header = () => {
+  const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date().toLocaleString());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="flex flex-row justify-between items-center min-h-[100px] border-b-2 border-gray-300 px-12">
-      <div className="text-3xl text-pink-500 font-bold flex flex-row items-center">
-        <h1>Dashboard</h1>
+    <header className="bg-gray-900 text-white p-4 flex items-center justify-between shadow-lg">
+      <div className="flex items-center">
+        <h1 className="text-3xl font-extrabold bg-blue-40 px-3 py-1 rounded-xl hover:bg-blue-600 transition duration-300">
+          ADMIN PAGE
+        </h1>
       </div>
-      <div className="flex flex-row items-center space-x-12">
-        <div className="flex justify-center items-center space-x-2">
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500 hover:text-pink-500 cursor-pointer">
-              <Search />
-            </span>
-            <input
-              type="text"
-              className="min-w-[300px] pl-10 pr-3 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm"
-              placeholder="Nhập nội dung..."
-            />
-          </div>
-        </div>
-        <Bell className="size-8 hover:text-pink-500 cursor-pointer" />
-        <CircleHelp className="size-8 hover:text-pink-500 cursor-pointer" />
-        <img
-          src={man}
-          className="w-[60px] border-2 border-pink-500 hover:border-4 cursor-pointer rounded-full"
-          alt=""
-        />
-      </div>
-    </div>
+      <div className="text-xl font-semibold">{currentTime}</div>
+    </header>
   );
 };
-
-export default Header;

@@ -9,8 +9,8 @@ import {
 import React from "react";
 
 export const OverviewCard = ({ title, total, percent }) => {
-  let bg = "bg-blue-300/50";
-  if (title === "Turnover") bg = "bg-pink-300/50";
+  let bg = "bg-blue-300/50 hover:border-blue-500";
+  if (title === "Turnover") bg = "bg-pink-300/50 hover:border-pink-500";
 
   let icon;
   switch (title) {
@@ -29,7 +29,7 @@ export const OverviewCard = ({ title, total, percent }) => {
 
   return (
     <div
-      className={`p-4 rounded-2xl shadow-md ${bg} flex items-center justify-between`}
+      className={`p-4 rounded-2xl shadow-md ${bg} flex items-center justify-between border-2 border-transparent`}
     >
       <div className="flex flex-col space-y-2">
         <h3 className="text-xl font-semibold text-gray-700">{title}</h3>
