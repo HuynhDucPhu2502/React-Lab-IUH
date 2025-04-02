@@ -1,12 +1,29 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import RootPage from "./pages/RootPage";
-import DashboardPage from "./pages/dashboard-pages";
+import DashboardPage from "./pages/dashboard-page";
+import { ProjectsPage } from "./pages/projects-page";
+import { TeamsPage } from "./pages/teams-page";
+import { AnalyticsPage } from "./pages/analytics-page";
+import { MessagesPage } from "./pages/messages-page";
+import { IntergrationsPage } from "./pages/intergrations-page";
 
 const router = createBrowserRouter([
   {
     path: "",
     element: <RootPage />,
-    children: [{ path: "", element: <DashboardPage /> }],
+    children: [
+      { index: true, element: <Navigate to="dashboard" replace /> },
+      { path: "/dashboard", element: <DashboardPage /> },
+      { path: "/projects", element: <ProjectsPage /> },
+      { path: "/teams", element: <TeamsPage /> },
+      { path: "/analytics", element: <AnalyticsPage /> },
+      { path: "/messages", element: <MessagesPage /> },
+      { path: "/intergrations", element: <IntergrationsPage /> },
+    ],
   },
 ]);
 
