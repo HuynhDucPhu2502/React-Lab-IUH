@@ -5,7 +5,12 @@ export const Modal = ({ children, title, onClose }) => {
   const container = document.getElementById("modal");
 
   return createPortal(
-    <dialog className="h-screen w-full fixed inset-0 flex justify-center items-center bg-black/50 z-50">
+    <dialog
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+      className="h-screen w-full fixed inset-0 flex justify-center items-center bg-black/50 z-50"
+    >
       <div className="w-1/2 border-2 border-black p-4 rounded-lg bg-white min-h-[300px]">
         <div className="flex justify-between items-center">
           <p></p>

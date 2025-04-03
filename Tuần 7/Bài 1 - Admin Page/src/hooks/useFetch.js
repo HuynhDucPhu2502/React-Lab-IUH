@@ -1,20 +1,26 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const useFetch = (fetchFunction) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [trigger, setTrigger] = useState(0);
 
-  useEffect(() => {
-    const fetch = async () => {
-      setIsLoading(true);
-      setData(await fetchFunction());
-      setIsLoading(false);
-    };
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
 
-    fetch();
+    const result = await fetchFunction();
+    setData(result);
+
+    setIsLoading(false);
   }, [fetchFunction]);
 
-  return { data, isLoading };
+  useEffect(() => {
+    fetchData();
+  }, [fetchData, trigger]);
+
+  const refetch = () => setTrigger((prev) => prev + 1);
+
+  return { data, isLoading, refetch };
 };
 
 export default useFetch;

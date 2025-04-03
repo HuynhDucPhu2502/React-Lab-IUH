@@ -1,24 +1,42 @@
 import React, { useState } from "react";
 
-const CustomerForm = ({ onSave, initialData }) => {
+const CustomerForm = ({ onSave, initialData, action }) => {
   const [customerName, setCustomerName] = useState(initialData?.name || "");
   const [companyName, setCompanyName] = useState(
     initialData?.company_name || ""
   );
   const [orderValue, setOrderValue] = useState(initialData?.order_value || "");
-  const [orderDate, setOrderDate] = useState(initialData?.order_date || "");
+  const [orderDate, setOrderDate] = useState(
+    initialData?.order_date
+      ? new Date(initialData.order_date).toLocaleDateString()
+      : ""
+  );
   const [status, setStatus] = useState(initialData?.status || "New");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const formattedDate = new Date(orderDate).toISOString();
     const newCustomer = {
       name: customerName,
       company_name: companyName,
       order_value: orderValue,
-      order_date: orderDate,
+      order_date: formattedDate,
       status: status,
     };
-    onSave(newCustomer);
+
+    setIsLoading(true);
+    switch (action) {
+      case "update": {
+        await onSave(initialData.id, newCustomer);
+        break;
+      }
+      case "add": {
+        await onSave(newCustomer);
+        break;
+      }
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -60,7 +78,9 @@ const CustomerForm = ({ onSave, initialData }) => {
         <label className="text-gray-700 font-semibold">Order Date</label>
         <input
           type="date"
-          value={orderDate}
+          value={
+            orderDate ? new Date(orderDate).toISOString().split("T")[0] : ""
+          }
           onChange={(e) => setOrderDate(e.target.value)}
           className="border p-3 rounded-md  focus:border-transparent focus:outline-none focus:ring-2 focus:ring-pink-500"
         />
@@ -81,9 +101,12 @@ const CustomerForm = ({ onSave, initialData }) => {
 
       <button
         type="submit"
-        className="mt-6 w-full py-3 bg-pink-500 text-white font-semibold rounded-md hover:bg-pink-600 transition duration-300"
+        className={`mt-6 w-full py-3 bg-pink-500 ${
+          isLoading ? "opacity-50 cursor-not-allowed" : ""
+        } text-white font-semibold rounded-md hover:bg-pink-600`}
+        disabled={isLoading}
       >
-        Save
+        {isLoading ? "Saving..." : "Save"}
       </button>
     </form>
   );
