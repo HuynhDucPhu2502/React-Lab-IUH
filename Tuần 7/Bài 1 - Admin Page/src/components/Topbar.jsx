@@ -1,11 +1,40 @@
 import { Bell, CircleHelp, Search } from "lucide-react";
 import man from "../assets/man.png";
+import { useLocation } from "react-router-dom";
 
 const Topbar = () => {
+  const location = useLocation();
+
+  let title;
+  switch (location.pathname) {
+    case "/dashboard":
+      title = "Dashboard";
+      break;
+    case "/projects":
+      title = "Projects";
+      break;
+    case "/teams":
+      title = "Teams";
+      break;
+    case "/analytics":
+      title = "Analytics";
+      break;
+    case "/messages":
+      title = "Messages";
+      break;
+    case "/intergrations":
+      title = "Intergrations";
+      break;
+    default:
+      title = "Dashboard";
+  }
+
+  console.log(title);
+
   return (
     <div className="flex flex-row justify-between items-center min-h-[100px] border-b-2 border-gray-300 px-12">
       <div className="text-3xl text-pink-500 font-bold flex flex-row items-center">
-        <h1>Dashboard</h1>
+        <h1>{title}</h1>
       </div>
       <div className="flex flex-row items-center space-x-12">
         <div className="flex justify-center items-center space-x-2">

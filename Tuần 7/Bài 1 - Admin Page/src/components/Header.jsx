@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import Clock from "./Clock";
 
 export const Header = () => {
-  const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date().toLocaleString());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <header className="bg-gray-900 text-white p-4 flex items-center justify-between shadow-lg">
       <div className="flex items-center">
@@ -21,7 +13,7 @@ export const Header = () => {
           ADMIN PAGE
         </Link>
       </div>
-      <div className="text-xl font-semibold">{currentTime}</div>
+      <Clock />
     </header>
   );
 };
