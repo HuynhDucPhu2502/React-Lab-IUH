@@ -1,7 +1,5 @@
 import { Overview } from "./overview/Overview";
 import { DetailedReport } from "./detailedreport/DetailedReport";
-import { Modal } from "../../components/Modal";
-import CustomerForm from "./detailedreport/CustomerForm";
 
 const DashboardPage = () => {
   return (
