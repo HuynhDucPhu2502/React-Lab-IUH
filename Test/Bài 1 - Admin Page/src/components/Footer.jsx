@@ -11,7 +11,7 @@ const Footer = () => {
               ADMIN PAGE
             </h1>
             <p className="md:text-lg">
-              Powered by Admin. Keep your website running smoothly.
+              Powered by PHU. Keep your website running smoothly.
             </p>
           </div>
         </div>
