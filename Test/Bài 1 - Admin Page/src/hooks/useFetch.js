@@ -19,8 +19,9 @@ const useFetch = (fetchFunction) => {
   }, [fetchData, trigger]);
 
   const refetch = () => setTrigger((prev) => prev + 1);
+  const toggleLoading = () => setIsLoading(!isLoading);
 
-  return { data, isLoading, refetch };
+  return { data, isLoading, refetch, toggleLoading };
 };
 
 export default useFetch;

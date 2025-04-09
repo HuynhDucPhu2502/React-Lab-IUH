@@ -10,11 +10,13 @@ import { TeamsPage } from "./pages/teams-page";
 import { AnalyticsPage } from "./pages/analytics-page";
 import { MessagesPage } from "./pages/messages-page";
 import { IntergrationsPage } from "./pages/intergrations-page";
+import { ErrorPage } from "./pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "",
     element: <RootPage />,
+    errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Navigate to="dashboard" replace /> },
       { path: "/dashboard", element: <DashboardPage /> },

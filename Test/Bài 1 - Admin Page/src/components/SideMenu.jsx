@@ -9,6 +9,7 @@ import {
 import logo from "../assets/Logo_IUH.png";
 
 import React from "react";
+import { CustomNavLink } from "./CustomNavLink";
 import { NavLink } from "react-router-dom";
 
 export const SideMenu = () => {
@@ -18,82 +19,40 @@ export const SideMenu = () => {
       <nav className="my-12 w-full">
         <ul>
           <li>
-            <NavLink
-              to="/dashboard"
-              className={({ isActive }) =>
-                isActive
-                  ? "py-2 flex flex-row justify-left space-x-2 bg-pink-500 w-full px-2 hover:cursor-pointer text-white"
-                  : "py-2 flex flex-row justify-left space-x-2 hover:bg-pink-300/50 w-full px-2 hover:cursor-pointer text-gray-500"
-              }
-            >
+            <CustomNavLink to={"/dashboard"}>
               <LayoutDashboard />
               <p className="text-lg font-bold">Dashboard</p>
-            </NavLink>
+            </CustomNavLink>
           </li>
           <li>
-            <NavLink
-              to="/projects"
-              className={({ isActive }) =>
-                isActive
-                  ? "py-2 flex flex-row justify-left space-x-2 bg-pink-500 w-full px-2 hover:cursor-pointer text-white"
-                  : "py-2 flex flex-row justify-left space-x-2 hover:bg-pink-300/50 w-full px-2 hover:cursor-pointer text-gray-500"
-              }
-            >
+            <CustomNavLink to="/projects">
               <FolderOpenDot />
               <p className="text-lg font-bold">Projects</p>
-            </NavLink>
+            </CustomNavLink>
           </li>
           <li>
-            <NavLink
-              to="/teams"
-              className={({ isActive }) =>
-                isActive
-                  ? "py-2 flex flex-row justify-left space-x-2 bg-pink-500 w-full px-2 hover:cursor-pointer text-white"
-                  : "py-2 flex flex-row justify-left space-x-2 hover:bg-pink-300/50 w-full px-2 hover:cursor-pointer text-gray-500"
-              }
-            >
+            <CustomNavLink to="/teams">
               <UsersRound />
               <p className="text-lg font-bold">Teams</p>
-            </NavLink>
+            </CustomNavLink>
           </li>
           <li>
-            <NavLink
-              to="/analytics"
-              className={({ isActive }) =>
-                isActive
-                  ? "py-2 flex flex-row justify-left space-x-2 bg-pink-500 w-full px-2 hover:cursor-pointer text-white"
-                  : "py-2 flex flex-row justify-left space-x-2 hover:bg-pink-300/50 w-full px-2 hover:cursor-pointer text-gray-500"
-              }
-            >
+            <CustomNavLink to="/analytics">
               <ChartSpline />
               <p className="text-lg font-bold">Analytics</p>
-            </NavLink>
+            </CustomNavLink>
           </li>
           <li>
-            <NavLink
-              to="/messages"
-              className={({ isActive }) =>
-                isActive
-                  ? "py-2 flex flex-row justify-left space-x-2 bg-pink-500 w-full px-2 hover:cursor-pointer text-white"
-                  : "py-2 flex flex-row justify-left space-x-2 hover:bg-pink-300/50 w-full px-2 hover:cursor-pointer text-gray-500"
-              }
-            >
+            <CustomNavLink to="/messages">
               <MessageSquareText />
               <p className="text-lg font-bold">Messages</p>
-            </NavLink>
+            </CustomNavLink>
           </li>
           <li>
-            <NavLink
-              to="/intergrations"
-              className={({ isActive }) =>
-                isActive
-                  ? "py-2 flex flex-row justify-left space-x-2 bg-pink-500 w-full px-2 hover:cursor-pointer text-white"
-                  : "py-2 flex flex-row justify-left space-x-2 hover:bg-pink-300/50 w-full px-2 hover:cursor-pointer text-gray-500"
-              }
-            >
+            <CustomNavLink to="/intergrations">
               <Blocks />
               <p className="text-lg font-bold">Intergrations</p>
-            </NavLink>
+            </CustomNavLink>
           </li>
         </ul>
       </nav>

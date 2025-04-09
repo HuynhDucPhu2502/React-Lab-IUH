@@ -4,13 +4,14 @@ import {
   saveCustomer,
   updateCustomer,
 } from "../../../services/CustomerService";
-import { SquareChartGantt } from "lucide-react";
+import { Download, FileUp, SquareChartGantt } from "lucide-react";
 import DataTable from "react-data-table-component";
 import { columns } from "./DataTableConfig";
 import { Loading } from "../../../components/Loading";
 import useFetch from "../../../hooks/useFetch";
 import { Modal } from "../../../components/Modal";
 import CustomerForm from "../../../components/CustomerForm";
+import { exportToCSV, importFromCSV } from "../../../utils/CSVUtils";
 
 const initialState = {
   action: "none",
@@ -32,7 +33,8 @@ function reducer(state, action) {
 
 export const DetailedReport = () => {
   const stableFetchCustomer = useCallback(fetchCustomer, []);
-  const { data, isLoading, refetch } = useFetch(stableFetchCustomer);
+  const { data, isLoading, refetch, toggleLoading } =
+    useFetch(stableFetchCustomer);
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -54,6 +56,37 @@ export const DetailedReport = () => {
     closeModal();
   };
 
+  const handleImport = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      importFromCSV(file, async (importedData) => {
+        try {
+          toggleLoading();
+
+          const promises = importedData.map((customer) => {
+            return saveCustomer(customer);
+          });
+          const results = await Promise.all(promises);
+
+          results.forEach((result, index) => {
+            if (result) {
+              console.log("Đã lưu khách hàng:", importedData[index].name);
+            } else {
+              console.warn(
+                "Không thể lưu khách hàng:",
+                importedData[index].name
+              );
+            }
+          });
+
+          refetch();
+        } catch (e) {
+          console.error("Lỗi khi lưu danh sách khách hàng:", e);
+        }
+      });
+    }
+  };
+
   return (
     <>
       <div className="flex justify-between items-center">
@@ -61,12 +94,33 @@ export const DetailedReport = () => {
           <SquareChartGantt className="text-pink-500 text-xl" />
           <h1 className="text-xl font-bold">Detailed Report</h1>
         </div>
-        <button
-          onClick={handleStartCreate}
-          className="size-12 bg-green-500 hover:bg-green-600 text-center rounded-lg text-2xl font-bold text-white cursor-pointer"
-        >
-          +
-        </button>
+        {!isLoading && (
+          <div className="flex space-x-2">
+            <button
+              onClick={handleStartCreate}
+              className="size-12 bg-green-500 hover:bg-green-600 text-center rounded-lg text-2xl font-bold text-white cursor-pointer"
+            >
+              +
+            </button>
+            <button
+              onClick={() => exportToCSV(data, "customers.csv")}
+              className="flex space-x-4 items-center bg-blue-600 hover:bg-blue-700 text-center rounded-lg text-lg font-bold text-white cursor-pointer px-4"
+            >
+              <Download />
+              <p>Export CSV</p>
+            </button>
+            <label className="flex space-x-4 items-center bg-green-600 hover:bg-green-700 text-center rounded-lg text-lg font-bold text-white cursor-pointer px-4">
+              <FileUp />
+              <p>Import CSV</p>
+              <input
+                type="file"
+                accept=".csv"
+                onChange={handleImport}
+                className="hidden"
+              />
+            </label>
+          </div>
+        )}
       </div>
 
       {/* Đang Fetch */}
