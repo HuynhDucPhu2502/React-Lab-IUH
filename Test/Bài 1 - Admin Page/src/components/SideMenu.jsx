@@ -12,7 +12,7 @@ import React from "react";
 
 export const SideMenu = () => {
   return (
-    <div className="border-gray-300 border-2 flex flex-col items-center py-4">
+    <div className="border-gray-300 border-e-2 flex flex-col items-center py-4">
       <img src={logo} alt="" className="w-[150px]" />
       <nav className="my-12 w-full">
         <ul>
