@@ -1,6 +1,6 @@
 import { PencilIcon } from "lucide-react";
 
-export const columns = [
+export const columns = (handleStartEdit) => [
   {
     name: "Customer Name",
     selector: (row) => row.name,
@@ -17,7 +17,7 @@ export const columns = [
   },
   {
     name: "Order Value",
-    selector: (row) => `$${row.order_value}`,
+    selector: (row) => row.order_value,
     sortable: true,
     cell: (row) => (
       <span className="text-pink-500 font-semibold">${row.order_value}</span>
@@ -52,13 +52,15 @@ export const columns = [
     ),
   },
   {
-    cell: () => (
-      <button className="p-1  hover:text-pink-600 cursor-pointer">
+    name: "Edit",
+    cell: (row) => (
+      <button
+        onClick={() => handleStartEdit(row)}
+        className="p-1 hover:text-pink-600 cursor-pointer"
+      >
         <PencilIcon className="w-5 h-5" />
       </button>
     ),
     ignoreRowClick: true,
-    allowOverflow: true,
-    button: true,
   },
 ];
