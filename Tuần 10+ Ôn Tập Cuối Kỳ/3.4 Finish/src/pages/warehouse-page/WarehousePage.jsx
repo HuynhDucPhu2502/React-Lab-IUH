@@ -34,8 +34,8 @@ export default function WarehousePage() {
           className="bg-amber-600 hover:bg-amber-700 text-white py-2 px-4 rounded"
         >
           {location.pathname === "/warehouse/add"
-            ? "Thêm kho hàng"
-            : "Đóng biểu mẫu thêm"}
+            ? "Đóng biểu mẫu thêm"
+            : "Thêm kho hàng"}
         </button>
       </div>
       {loading ? (
