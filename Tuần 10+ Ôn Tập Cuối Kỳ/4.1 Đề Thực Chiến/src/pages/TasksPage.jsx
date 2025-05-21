@@ -1,40 +1,37 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchTasks } from "../features/taskSlice";
 import TaskCard from "../components/TaskCard";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import useTask from "../hooks/useTask";
 
 const TasksPage = () => {
-  const { tasks, isLoading } = useTask();
-
+  const { tasks, isLoading } = useSelector((state) => state.task);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
 
-  const navigate = useNavigate();
-  const location = useLocation();
   const handlePathing = () => {
     if (location.pathname === "/tasks") navigate("/tasks/add");
     else navigate("/tasks");
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="px-4 my-4">
+    <div className="px-4 my-8">
       <div className="flex flex-row justify-between items-center">
-        <h1 className="text-blue-500 font-bold text-xl my-4">
+        <h2 className="text-blue-500 font-bold text-xl my-4">
           Danh sách công việc
-        </h1>
+        </h2>
         <button
           onClick={handlePathing}
-          className="bg-cyan-500 hover:bg-cyan-600 px-2 py-1 text-white rounded-lg"
+          className="rounded-lg bg-orange-500 hover:bg-orange-600 text-white text-center py-2 px-4"
         >
-          Thêm công việc
+          {location.pathname === "/tasks" ? "Thêm công việc" : "Tắt biểu mẫu"}
         </button>
       </div>
 
@@ -42,7 +39,7 @@ const TasksPage = () => {
         <Outlet />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 ">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
         {!isLoading &&
           tasks &&
           tasks.map((x) => <TaskCard task={x} key={x.id} />)}
