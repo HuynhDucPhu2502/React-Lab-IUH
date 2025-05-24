@@ -33,8 +33,9 @@ const taskSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(deleteTask.fulfilled, (state) => {
+      .addCase(deleteTask.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.tasks = state.tasks.filter((task) => task.id !== action.payload);
       })
       .addCase(deleteTask.rejected, (state, action) => {
         state.isLoading = false;
@@ -46,8 +47,9 @@ const taskSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(addTask.fulfilled, (state) => {
+      .addCase(addTask.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.tasks.push(action.payload);
       })
       .addCase(addTask.rejected, (state, action) => {
         state.isLoading = false;
@@ -59,8 +61,11 @@ const taskSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(updateTask.fulfilled, (state) => {
+      .addCase(updateTask.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.tasks = state.tasks.map((x) =>
+          x.id === action.payload.id ? action.payload : x
+        );
       })
       .addCase(updateTask.rejected, (state, action) => {
         state.isLoading = false;
@@ -83,7 +88,7 @@ export const fetchTasks = createAsyncThunk(
 export const deleteTask = createAsyncThunk(
   "taskSlice/deleteTask",
   async (id, { rejectWithValue }) => {
-    await fetch(`http://localhost:3001/tasks/${id}`, {
+    return await fetch(`http://localhost:3001/tasks/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +100,7 @@ export const deleteTask = createAsyncThunk(
 export const addTask = createAsyncThunk(
   "taskSlice/addTask",
   async (task, { rejectWithValue }) => {
-    await fetch(`http://localhost:3001/tasks`, {
+    return await fetch(`http://localhost:3001/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -108,7 +113,7 @@ export const addTask = createAsyncThunk(
 export const updateTask = createAsyncThunk(
   "taskSlice/updateTask",
   async ({ id, task }, { rejectWithValue }) => {
-    await fetch(`http://localhost:3001/tasks/${id}`, {
+    return await fetch(`http://localhost:3001/tasks/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

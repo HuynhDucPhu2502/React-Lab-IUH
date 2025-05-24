@@ -15,18 +15,20 @@ const App = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="px-4 my-12">
-      <ProductForm />
+    <>
+      <div className="px-4 my-12">
+        <ProductForm />
 
-      <h1 className="text-3xl text-blue-500 font-bold">Danh sách sản phẩm</h1>
-      <div className="grid grid-cols-4 gap-4 mt-4">
-        {!loading &&
-          products &&
-          products.map((x) => (
-            <ProductCard product={x} key={x.id}></ProductCard>
-          ))}
+        <h1 className="text-3xl text-blue-500 font-bold">Danh sách sản phẩm</h1>
+        <div className="grid grid-cols-4 gap-4 mt-4">
+          {!loading &&
+            products &&
+            products.map((x) => (
+              <ProductCard product={x} key={x.id}></ProductCard>
+            ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
