@@ -1,9 +1,9 @@
 # react-lab-iuh
 
 ## Mô tả
-[VN] Đây là các project trong những ngày đầu học React, sử dụng TypeScript và React để làm quen.
+[VN] Đây là các project học thực hành lập trình phân tích giao diện ở trường hằng tuần.
 
-[ENG] These are projects from the early days of learning React, built with TypeScript and practicing.
+[ENG] These are weekly school projects for learning interface analysis programming.
 
 ## Nội dung
 - Tuần 6: Ôn thi giữa kỳ theo đề MrTiến
