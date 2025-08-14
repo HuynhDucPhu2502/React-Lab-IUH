@@ -1,9 +1,6 @@
 # react-lab-iuh
 
-## Mô tả
-[VN] Đây là các project học thực hành lập trình phân tích giao diện ở trường hằng tuần.
-
-[ENG] These are weekly school projects for learning interface analysis programming.
+Đây là các project học thực hành lập trình phân tích giao diện ở trường hằng tuần.
 
 ## Nội dung
 - Tuần 6: Ôn thi giữa kỳ theo đề MrTiến
