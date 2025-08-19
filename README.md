@@ -1,5 +1,4 @@
-# react-lab-iuh
-
+# React Lab IUH
 Đây là các project học thực hành lập trình phân tích giao diện ở trường hằng tuần.
 
 ## Nội dung
